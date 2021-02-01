@@ -15,15 +15,17 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostsCreateComponent } from './posts/posts-create/posts-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostsCreateComponent,
-    HeaderComponent,
-    PostListComponent
+    PostListComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +38,10 @@ import { PostListComponent } from './posts/post-list/post-list.component';
     MatCardModule,
     MatToolbarModule,
     MatIconModule,
-    MatSidenavModule
-    
+    MatSidenavModule,
+    LayoutModule,
+    MatListModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
