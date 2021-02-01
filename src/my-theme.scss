@@ -3,7 +3,7 @@
 
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 $my-theme-primary: mat-palette($mat-indigo, A700, A400, 800);
-$my-theme-accent: mat-palette($mat-yellow,A200);
+$my-theme-accent: mat-palette($mat-yellow, A400);
 $my-theme-warn: mat-palette($mat-red,A400);
 
 $my-theme: mat-light-theme($my-theme-primary, $my-theme-accent, $my-theme-warn);
