@@ -20,7 +20,7 @@ app.post("/api/posts", (req, res, next) => {
   });
 })
 
-app.use('/api/posts', (req, res, next) => {
+app.get('/api/posts', (req, res, next) => {
   const posts = [
     {id: 'asd97a982s3', title: 'This is header 1', content: 'This is coming from server'},
     {id: '52s15dsd5aw', title: 'This is header 2', content: 'This is coming from server'},
