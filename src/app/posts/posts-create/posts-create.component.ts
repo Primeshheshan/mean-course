@@ -13,6 +13,9 @@ export class PostsCreateComponent implements OnInit {
   constructor(private postService: PostServcie) { }
 
   onAddPost() {
+    if(this.postFrom.invalid) {
+      return;
+    }
     this.postService.addPosts(this.postFrom.value.title, this.postFrom.value.content);
     this.postFrom.reset();
   }
