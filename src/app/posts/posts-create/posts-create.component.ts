@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PostModel } from '../post.model';
 import { PostServcie } from '../post.servcie';
 
 @Component({
@@ -11,19 +10,11 @@ import { PostServcie } from '../post.servcie';
 export class PostsCreateComponent implements OnInit {
   public postFrom!: FormGroup;
 
-  constructor(
-    private postService: PostServcie,
-
-
-  ) { }
+  constructor(private postService: PostServcie) { }
 
   onAddPost() {
-    const post: PostModel[] = [{
-      title: this.postFrom.value.title,
-      content: this.postFrom.value.content
-    }];
-
-    this.postService.postEmitter.next(post);
+    this.postService.addPosts(this.postFrom.value.title, this.postFrom.value.content);
+    this.postFrom.reset();
   }
 
   ngOnInit(): void {

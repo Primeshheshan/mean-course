@@ -9,17 +9,15 @@ import { PostServcie } from '../post.servcie';
   styleUrls: ['./post-list.component.css']
 })
 export class PostListComponent implements OnInit, OnDestroy {
-  posts!: PostModel[];
-  private postSubscribe!: Subscription
+  posts: PostModel[]=[];
+  private postSubscribe!: Subscription;
 
-  constructor(
-    private postService: PostServcie
-  ) { }
+  constructor( private postService: PostServcie) { }
 
   ngOnInit(): void {
     this.posts = this.postService.getPosts();
-    this.postSubscribe =  this.postService.postEmitter.subscribe(
-      (posts: PostModel[]) => {
+    this.postSubscribe =  this.postService.getPostUpdateLisiner()
+      .subscribe((posts: PostModel[]) => {
         this.posts = posts;
       }
     );
