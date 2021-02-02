@@ -9,10 +9,12 @@ import { PostServcie } from '../post.servcie';
   styleUrls: ['./posts-create.component.css']
 })
 export class PostsCreateComponent implements OnInit {
-  postFrom!: FormGroup;
+  public postFrom!: FormGroup;
 
   constructor(
-    private postService: PostServcie
+    private postService: PostServcie,
+
+
   ) { }
 
   onAddPost() {

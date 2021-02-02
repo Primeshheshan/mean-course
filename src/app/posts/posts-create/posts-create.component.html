@@ -7,6 +7,7 @@
       placeholder="Title"
       formControlName="title"
       required>
+      <mat-error *ngIf="!postFrom.hasError('required')">Please enter post title</mat-error>
     </mat-form-field>
     <mat-form-field>
       <textarea
@@ -17,8 +18,10 @@
        rows="3"
        required>
       </textarea>
+      <mat-error *ngIf="!postFrom.hasError('required')">Please enter post content</mat-error>
     </mat-form-field>
     <button
+      class="submit-button"
       color="accent"
       (click)="onAddPost()"
       mat-raised-button
