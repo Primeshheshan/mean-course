@@ -1,11 +1,12 @@
 import { HttpClient } from "@angular/common/http";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { PostModel } from "./post.model";
 
 @Injectable({providedIn: 'root'})
 export class PostServcie {
-  postUpdated = new Subject<PostModel[]>();
+  private postUpdated = new Subject<PostModel[]>();
   private posts: PostModel[]= []; // initally empty array
 
   constructor(private http: HttpClient) {}
@@ -15,9 +16,8 @@ export class PostServcie {
     this.http.get<{message: string, posts: PostModel[]}>('http://localhost:3000/api/posts')
       .subscribe((postData) => {
         this.posts = postData.posts;
+        this.postUpdated.next([...this.posts]);
       });
-
-
   }
 
   getPostUpdateLisiner() {
