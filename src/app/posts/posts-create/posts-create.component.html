@@ -1,12 +1,30 @@
 <mat-card>
-  <mat-form-field>
-    <input matInput type="text" [(ngModel)]="inputTitle">
-  </mat-form-field>
-  <mat-form-field>
-    <textarea matInput name="" id="" rows="4" [(ngModel)]="inputContent"></textarea>
-  </mat-form-field>
-<button color="accent"
-        (click)="onAddPost()"
-        mat-raised-button>Save Post</button>
+  <form [formGroup]="postFrom" (ngSubmit)="onAddPost()">
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      placeholder="Title"
+      formControlName="title"
+      required>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+       matInput
+       placeholder="Content"
+       formControlName="content"
+       id=""
+       rows="3"
+       required>
+      </textarea>
+    </mat-form-field>
+    <button
+      color="accent"
+      (click)="onAddPost()"
+      mat-raised-button
+      [disabled]="!postFrom.valid">
+      Save Post
+    </button>
+  </form>
 </mat-card>
 
