@@ -7,10 +7,10 @@ const app =  express();
 
 mongoose.connect("mongodb+srv://primesh:SbHAm8bXVq8G4S5@cluster0.21bca.mongodb.net/userPosts?retryWrites=true&w=majority")
 .then(() => {
-  console.log('Connected to database successfullly!');
+  console.log('==>Connected to database successfullly!');
 })
 .catch(() => {
-  console.log('Connection failed!');
+  console.log('==>Connection failed!');
 });
 
 app.use(bodyParser.json()); // parsing json data
@@ -34,14 +34,14 @@ app.post("/api/posts", (req, res, next) => {
 })
 
 app.get('/api/posts', (req, res, next) => {
-  const posts = [
-    {id: 'asd97a982s3', title: 'This is server-side header 1', content: 'This is coming from server'},
-    {id: '52s15dsd5aw', title: 'This is server-side header 2', content: 'This is coming from server'},
-  ];
-  res.status(200).json({
-    message: 'Posts fetched successfully',
-    posts: posts
+  Post.find().then(documents => {
+    console.log(documents);
+    res.status(200).json({
+      message: 'Posts fetched successfully',
+      posts: documents
+    });
   });
+
 });
 
 module.exports = app;
