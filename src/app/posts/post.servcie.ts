@@ -36,7 +36,8 @@ export class PostServcie {
     return this.postUpdated.asObservable()
   }
 
-  addPosts(title:string, content: string) { // add new post
+  // add new post
+  addPosts(title:string, content: string) {
     const post: PostModel = { id: '', title: title, content: content};
     this.http.post<{message: string}>('http://localhost:3000/api/posts', post)
       .subscribe( responseData => {
@@ -45,5 +46,13 @@ export class PostServcie {
         this.postUpdated.next([...this.posts]);
       });
 
+  }
+
+  //delete post
+  deletePost(postId: string) {
+    this.http.delete('http://localhost:3000/api/posts/' + postId)
+      .subscribe(() => {
+        console.log('Deleted!');
+      });
   }
 }
