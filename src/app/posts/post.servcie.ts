@@ -13,7 +13,7 @@ export class PostServcie {
 
   getPosts() {
     // return [...this.posts]; not return original array return copy of array
-    this.http.get<{message: string, posts: any[]}>('http://localhost:3000/api/posts')
+    this.http.get<{message: string, posts: any[]}>("http://localhost:3000/api/posts")
       .pipe(map((postData) => {
         return postData.posts.map(
           post => {
@@ -38,10 +38,11 @@ export class PostServcie {
 
   // add new post
   addPosts(title:string, content: string) {
-    const post: PostModel = { id: '', title: title, content: content};
-    this.http.post<{message: string}>('http://localhost:3000/api/posts', post)
+    const post: PostModel = { id: "", title: title, content: content};
+    this.http.post<{message: string, postId: string}>("http://localhost:3000/api/posts", post)
       .subscribe( responseData => {
-        console.log(responseData.message);
+        const id = responseData.postId;
+        post.id = id;
         this.posts.push(post);
         this.postUpdated.next([...this.posts]);
       });
@@ -49,10 +50,15 @@ export class PostServcie {
   }
 
   //delete post
+
+
+
   deletePost(postId: string) {
-    this.http.delete('http://localhost:3000/api/posts/' + postId)
+    this.http.delete("http://localhost:3000/api/posts/" + postId)
       .subscribe(() => {
-        console.log('Deleted!');
+        const updatedPosts = this.posts.filter(post => post.id !== postId);
+        this.posts = updatedPosts;
+        this.postUpdated.next([...this.posts]);
       });
   }
 }
