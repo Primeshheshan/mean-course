@@ -22,6 +22,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// save data in mongoDb
 app.post("/api/posts", (req, res, next) => {
   const post = new Post({
     title: req.body.title,
@@ -33,6 +34,7 @@ app.post("/api/posts", (req, res, next) => {
   });
 })
 
+// fetch data from mongoDb
 app.get('/api/posts', (req, res, next) => {
   Post.find().then(documents => {
     console.log(documents);
