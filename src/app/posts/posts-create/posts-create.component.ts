@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -42,18 +42,20 @@ export class PostsCreateComponent implements OnInit {
       if(paramMap.has('postId')) {
         this.mode = 'edit';
         this.postId = paramMap.get('postId');
-        this.post = this.postService.getPost(this.postId);
-        this.postFrom.patchValue({
-          title: this.post.title,
-          content: this.post.content
+        this.postService.getPost(this.postId).subscribe(postData => {
+          this.post = {id: postData._id, title:postData.title, content: postData.content};
+          this.postFrom.patchValue({ // when get vales set that in form
+            title: this.post?.title,
+            content: this.post?.content
+          });
         });
+
       }else {
         this.mode = 'create';
         this.postId = null;
       }
     });
-
-
   }
+
 
 }
