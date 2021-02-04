@@ -11,6 +11,7 @@ import { PostServcie } from '../post.servcie';
 export class PostListComponent implements OnInit, OnDestroy {
   posts: PostModel[]=[];
   private postSubscribe!: Subscription;
+  isLoading = false;
 
   constructor( private postService: PostServcie) { }
 
@@ -19,9 +20,11 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.postService.getPosts();
     this.postSubscribe =  this.postService.getPostUpdateLisiner()
       .subscribe((posts: PostModel[]) => {
+        this.isLoading = false;
         this.posts = posts;
       }
     );

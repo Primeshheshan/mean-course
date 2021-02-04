@@ -15,6 +15,7 @@ export class PostsCreateComponent implements OnInit {
   public mode = 'create';
   private postId!: string;
   post!: PostModel;
+  isLoading = false;
 
   constructor(
     private postService: PostServcie,
@@ -24,6 +25,7 @@ export class PostsCreateComponent implements OnInit {
     if(this.postFrom.invalid) {
       return;
     }
+    this.isLoading = true;
     if(this.mode === 'create') {
     this.postService.addPosts(this.postFrom.value.title, this.postFrom.value.content);
     }else {
@@ -42,7 +44,9 @@ export class PostsCreateComponent implements OnInit {
       if(paramMap.has('postId')) {
         this.mode = 'edit';
         this.postId = paramMap.get('postId');
+        this.isLoading = true;
         this.postService.getPost(this.postId).subscribe(postData => {
+          this.isLoading = false;
           this.post = {id: postData._id, title:postData.title, content: postData.content};
           this.postFrom.patchValue({ // when get vales set that in form
             title: this.post?.title,
