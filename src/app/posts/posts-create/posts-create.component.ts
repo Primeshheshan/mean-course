@@ -16,6 +16,7 @@ export class PostsCreateComponent implements OnInit {
   private postId!: string;
   post!: PostModel;
   isLoading = false;
+  imagePreview!: string;
 
   constructor(
     private postService: PostServcie,
@@ -34,10 +35,23 @@ export class PostsCreateComponent implements OnInit {
     this.postFrom.reset();
   }
 
+  onImgPicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0]; // file object
+    this.postFrom.patchValue({image: file}); // can patch one element in the form
+    this.postFrom.get('image')?.updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+    console.log(file);
+  }
+
   ngOnInit(): void {
     this.postFrom = new FormGroup({
-      'title': new FormControl(null, Validators.required),
-      'content': new FormControl(null, Validators.required),
+      title: new FormControl(null, Validators.required),
+      content: new FormControl(null, Validators.required),
+      image: new FormControl(null, Validators.required),
     });
 
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
@@ -48,9 +62,9 @@ export class PostsCreateComponent implements OnInit {
         this.postService.getPost(this.postId).subscribe(postData => {
           this.isLoading = false;
           this.post = {id: postData._id, title:postData.title, content: postData.content};
-          this.postFrom.patchValue({ // when get vales set that in form
-            title: this.post?.title,
-            content: this.post?.content
+          this.postFrom.patchValue({ // when get all vales set that all in form
+            title: this.post.title,
+            content: this.post.content
           });
         });
 

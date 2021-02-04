@@ -15,3 +15,22 @@ textarea {
 mat-spinner {
   margin: auto;
 }
+
+.pickImgbtn {
+  margin: 10px auto;
+}
+
+.filePicker {
+  visibility: hidden;
+}
+
+.image-preview {
+  height: 20rem;
+  width: fit-content;
+  margin: 10px auto;
+  display: block;
+}
+
+.image-preview img {
+  height: 100%;
+}
