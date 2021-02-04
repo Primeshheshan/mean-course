@@ -32,6 +32,7 @@
     <ng-template #updatePost>
       <button
       class="submit-button"
+      (click)="onSavePost()"
       color="accent"
       mat-raised-button
       [disabled]="!postFrom.valid">
