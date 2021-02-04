@@ -1,5 +1,5 @@
 <mat-card>
-  <form [formGroup]="postFrom" (ngSubmit)="onAddPost()">
+  <form [formGroup]="postFrom" (ngSubmit)="onSavePost()">
     <mat-form-field>
       <input
       matInput
@@ -21,13 +21,24 @@
       <mat-error *ngIf="!postFrom.hasError('required')">Please enter post content</mat-error>
     </mat-form-field>
     <button
+      *ngIf="mode ==='create'; else updatePost"
       class="submit-button"
       color="accent"
-      (click)="onAddPost()"
+      (click)="onSavePost()"
       mat-raised-button
       [disabled]="!postFrom.valid">
       Save Post
     </button>
+    <ng-template #updatePost>
+      <button
+      class="submit-button"
+      color="accent"
+      mat-raised-button
+      [disabled]="!postFrom.valid">
+      Update Post
+    </button>
+    </ng-template>
+
   </form>
 </mat-card>
 
