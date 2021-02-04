@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { PostModel } from "./post.model";
@@ -9,7 +10,9 @@ export class PostServcie {
   private postUpdated = new Subject<PostModel[]>();
   private posts: PostModel[]= []; // initally empty array
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router) {}
 
   getPosts() {
     // return [...this.posts]; not return original array return copy of array
@@ -49,6 +52,7 @@ export class PostServcie {
         post.id = id;
         this.posts.push(post);
         this.postUpdated.next([...this.posts]);
+        this.router.navigate(["/"]);
       });
 
   }
@@ -73,6 +77,7 @@ export class PostServcie {
       updatedPosts[oldPostIndex] = post; // change old array with new element
       this.posts = updatedPosts; // new array stored in posts variable
       this.postUpdated.next([...this.posts]);
+      this.router.navigate(["/"]);
     });
   }
 
