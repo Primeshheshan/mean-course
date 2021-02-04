@@ -65,10 +65,14 @@ export class PostServcie {
 
   // update post
   updatePost(postId: string, title: string, content: string) {
-    const post: PostModel = {id: postId, title: title, content: content};
+    const post: PostModel = {id: postId, title: title, content: content}; // this is updated post element
     this.http.put("http://localhost:3000/api/posts/" + postId, post)
     .subscribe(response => {
-      console.log(response);
+      const updatedPosts = [...this.posts]; // this updatedPosts store old posts array
+      const oldPostIndex = updatedPosts.findIndex(p => p.id === post.id); // oldPostIndex store index of the updated post element
+      updatedPosts[oldPostIndex] = post; // change old array with new element
+      this.posts = updatedPosts; // new array stored in posts variable
+      this.postUpdated.next([...this.posts]);
     });
   }
 
