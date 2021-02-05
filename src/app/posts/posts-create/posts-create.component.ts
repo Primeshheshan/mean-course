@@ -29,7 +29,11 @@ export class PostsCreateComponent implements OnInit {
     }
     this.isLoading = true;
     if(this.mode === 'create') {
-    this.postService.addPosts(this.postFrom.value.title, this.postFrom.value.content);
+    this.postService.addPosts(
+      this.postFrom.value.title,
+      this.postFrom.value.content,
+      this.postFrom.value.image
+    );
     }else {
       this.postService.updatePost(this.postId, this.postFrom.value.title, this.postFrom.value.content);
     }
