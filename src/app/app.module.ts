@@ -15,6 +15,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,7 +49,7 @@ import { MainNavComponent } from './main-nav/main-nav.component';
     MatListModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
-
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
