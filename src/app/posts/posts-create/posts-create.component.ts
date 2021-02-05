@@ -66,7 +66,12 @@ export class PostsCreateComponent implements OnInit {
         this.isLoading = true;
         this.postService.getPost(this.postId).subscribe(postData => {
           this.isLoading = false;
-          this.post = {id: postData._id, title:postData.title, content: postData.content};
+          this.post = {
+            id: postData._id,
+            title:postData.title,
+            content: postData.content,
+              imagePath: null
+          };
           this.postFrom.patchValue({ // when get all vales set that all in form
             title: this.post.title,
             content: this.post.content

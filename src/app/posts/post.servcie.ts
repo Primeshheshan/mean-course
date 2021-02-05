@@ -23,7 +23,8 @@ export class PostServcie {
             return {
               title: post.title,
               content: post.content,
-              id: post._id
+              id: post._id,
+              imagePath: post.imagePath
             };
           }
         );
@@ -50,9 +51,14 @@ export class PostServcie {
     postData.append("content", content);
     postData.append("image", image, title);
 
-    this.http.post<{message: string, postId: string}>("http://localhost:3000/api/posts", postData)
+    this.http.post<{message: string, post: PostModel}>("http://localhost:3000/api/posts", postData)
       .subscribe( responseData => {
-        const post: PostModel = {id: responseData.postId, title:title, content: content};
+        const post: PostModel = {
+          id: responseData.post.id,
+          title:title,
+          content: content,
+          imagePath: responseData.post.imagePath
+        };
         this.posts.push(post);
         this.postUpdated.next([...this.posts]);
         this.router.navigate(["/"]);
@@ -72,7 +78,12 @@ export class PostServcie {
 
   // update post
   updatePost(postId: string, title: string, content: string) {
-    const post: PostModel = {id: postId, title: title, content: content}; // this is updated post element
+    const post: PostModel = {
+      id: postId,
+      title: title,
+      content: content,
+      imagePath: null
+    }; // this is updated post element
     this.http.put("http://localhost:3000/api/posts/" + postId, post)
     .subscribe(response => {
       const updatedPosts = [...this.posts]; // this updatedPosts store old posts array
