@@ -52,8 +52,7 @@ router.post("", multer({storage: storage}).single("image"), (req, res, next) => 
 // fetch data from mongoDb
 router.get("", (req, res, next) => {
   Post.find().then(documents => {
-    // console.log(documents);
-    res.status(200).json({
+      res.status(200).json({
       message: 'Posts fetched successfully',
       posts: documents
     });
@@ -80,11 +79,18 @@ router.delete("/:id", (req, res, next) => {
 });
 
 // update post
-router.put("/:id", (req, res, next) => {
-  const post = new Post({
-    _id: req.body.id,
-    title: req.body.title,
-    content: req.body.content,
+router.put("/:id", multer({storage: storage}).single("image"),
+  (req, res, next) => {
+    let imagePath = req.body.imagePath;
+    if(req.file) {
+      const url = req.protocol + '://' + req.get("host");
+      imagePath = url + "/images/" + req.file.filename;
+    }
+    const post = new Post({
+      _id: req.body.id,
+      title: req.body.title,
+      content: req.body.content,
+      imagePath: imagePath
   });
   Post.updateOne({_id: req.params.id}, post).then(result => {
     res.status(200).json({message: "Post update successfully!"});

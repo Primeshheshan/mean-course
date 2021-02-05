@@ -41,7 +41,8 @@ export class PostServcie {
   }
 
   getPost(id:string) {
-    return this.http.get<{_id: string, title: string, content: string}>("http://localhost:3000/api/posts/" + id);
+    return this.http.get<{_id: string, title: string, content: string, imagePath: string}>
+    ("http://localhost:3000/api/posts/" + id);
   }
 
   // add new post
@@ -77,17 +78,33 @@ export class PostServcie {
   }
 
   // update post
-  updatePost(postId: string, title: string, content: string) {
-    const post: PostModel = {
-      id: postId,
-      title: title,
-      content: content,
-      imagePath: null
-    }; // this is updated post element
-    this.http.put("http://localhost:3000/api/posts/" + postId, post)
+  updatePost(postId: string, title: string, content: string, image: File | string) {
+    let postData: PostModel | FormData;
+    if(typeof(image) === 'object') {
+       postData = new FormData();
+      postData.append("id", postId); // FormData objects
+      postData.append("title", title); // FormData objects
+      postData.append("content", content); // FormData objects
+      postData.append("image", image, title); // FormData objects
+    } else {
+       postData = {
+        id: postId,
+        title: title,
+        content: content,
+        imagePath: image
+      }
+    }
+    // this is updated post element
+    this.http.put("http://localhost:3000/api/posts/" + postId, postData)
     .subscribe(response => {
       const updatedPosts = [...this.posts]; // this updatedPosts store old posts array
-      const oldPostIndex = updatedPosts.findIndex(p => p.id === post.id); // oldPostIndex store index of the updated post element
+      const oldPostIndex = updatedPosts.findIndex(p => p.id === postId); // oldPostIndex store index of the updated post element
+      const post: PostModel = {
+        id: postId,
+        title: title,
+        content: content,
+        imagePath:""
+      };
       updatedPosts[oldPostIndex] = post; // change old array with new element
       this.posts = updatedPosts; // new array stored in posts variable
       this.postUpdated.next([...this.posts]);

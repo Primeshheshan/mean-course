@@ -35,7 +35,12 @@ export class PostsCreateComponent implements OnInit {
       this.postFrom.value.image
     );
     }else {
-      this.postService.updatePost(this.postId, this.postFrom.value.title, this.postFrom.value.content);
+      this.postService.updatePost(
+        this.postId,
+        this.postFrom.value.title,
+        this.postFrom.value.content,
+        this.postFrom.value.image
+        );
     }
     this.postFrom.reset();
   }
@@ -70,11 +75,12 @@ export class PostsCreateComponent implements OnInit {
             id: postData._id,
             title:postData.title,
             content: postData.content,
-              imagePath: null
+            imagePath: postData.imagePath
           };
-          this.postFrom.patchValue({ // when get all vales set that all in form
+          this.postFrom.setValue({ // when get all vales set that all in form
             title: this.post.title,
-            content: this.post.content
+            content: this.post.content,
+            image: this.post.imagePath
           });
         });
 
