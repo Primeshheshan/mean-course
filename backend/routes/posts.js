@@ -51,15 +51,30 @@ router.post("", multer({storage: storage}).single("image"), (req, res, next) => 
 
 // fetch data from mongoDb
 router.get("", (req, res, next) => {
-  Post.find().then(documents => {
+  const pageSize = +req.query.pagesize;
+  const currentPage = +req.query.page;
+  const postQuery = Post.find();
+  let fetchedPosts;
+  if(pageSize && currentPage) {
+    postQuery.skip(pageSize * (currentPage-1))
+    .limit(pageSize);
+  }
+  postQuery
+    .then(documents => {
+      fetchedPosts = documents;
+      return Post.count()  ;
+    })
+    .then(count => {
       res.status(200).json({
       message: 'Posts fetched successfully',
-      posts: documents
+      posts: fetchedPosts,
+      maxPosts: count // number of post we have in database
     });
   });
 
 });
 
+// fetch post after restart when update post
 router.get("/:id", (req, res, next) =>{
   Post.findById(req.params.id).then(post => {
     if(post) {

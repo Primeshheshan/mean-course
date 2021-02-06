@@ -7,18 +7,20 @@ import { PostModel } from "./post.model";
 
 @Injectable({providedIn: 'root'})
 export class PostServcie {
-  private postUpdated = new Subject<PostModel[]>();
+  // subject getting back js object with posts, postCount property
+  private postUpdated = new Subject<{posts: PostModel[], postCount: number}>();
   private posts: PostModel[]= []; // initally empty array
 
   constructor(
     private http: HttpClient,
     private router: Router) {}
 
-  getPosts() {
+  getPosts(postsPerPage: number, currentPage: number) {
     // return [...this.posts]; not return original array return copy of array
-    this.http.get<{message: string, posts: any[]}>("http://localhost:3000/api/posts")
+    const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
+    this.http.get<{message: string, posts: any[], maxPosts:number}>("http://localhost:3000/api/posts" + queryParams)
       .pipe(map((postData) => {
-        return postData.posts.map(
+        return {posts: postData.posts.map(
           post => {
             return {
               title: post.title,
@@ -27,12 +29,14 @@ export class PostServcie {
               imagePath: post.imagePath
             };
           }
-        );
+        ), maxPosts: postData.maxPosts};
       }))
-      .subscribe((transformedData) => {
-        this.posts = transformedData
-        ;
-        this.postUpdated.next([...this.posts]);
+      .subscribe((transformedPostData) => {
+        this.posts = transformedPostData.posts;
+        this.postUpdated.next({
+          posts: [...this.posts],
+          postCount: transformedPostData.maxPosts
+        });
       });
   }
 
@@ -54,14 +58,7 @@ export class PostServcie {
 
     this.http.post<{message: string, post: PostModel}>("http://localhost:3000/api/posts", postData)
       .subscribe( responseData => {
-        const post: PostModel = {
-          id: responseData.post.id,
-          title:title,
-          content: content,
-          imagePath: responseData.post.imagePath
-        };
-        this.posts.push(post);
-        this.postUpdated.next([...this.posts]);
+
         this.router.navigate(["/"]);
       });
 
@@ -69,12 +66,7 @@ export class PostServcie {
 
   //delete post
   deletePost(postId: string) {
-    this.http.delete("http://localhost:3000/api/posts/" + postId)
-      .subscribe(() => {
-        const updatedPosts = this.posts.filter(post => post.id !== postId);
-        this.posts = updatedPosts;
-        this.postUpdated.next([...this.posts]);
-      });
+    return this.http.delete("http://localhost:3000/api/posts/" + postId);
   }
 
   // update post
@@ -97,17 +89,6 @@ export class PostServcie {
     // this is updated post element
     this.http.put("http://localhost:3000/api/posts/" + postId, postData)
     .subscribe(response => {
-      const updatedPosts = [...this.posts]; // this updatedPosts store old posts array
-      const oldPostIndex = updatedPosts.findIndex(p => p.id === postId); // oldPostIndex store index of the updated post element
-      const post: PostModel = {
-        id: postId,
-        title: title,
-        content: content,
-        imagePath:""
-      };
-      updatedPosts[oldPostIndex] = post; // change old array with new element
-      this.posts = updatedPosts; // new array stored in posts variable
-      this.postUpdated.next([...this.posts]);
       this.router.navigate(["/"]);
     });
   }
