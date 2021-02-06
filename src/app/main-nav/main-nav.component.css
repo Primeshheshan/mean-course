@@ -26,3 +26,13 @@
   margin: 0 10px;
   display: inline-block;
 }
+
+.mat-nav-list a.active {
+  background: #e6e6e6;
+}
+mat-toolbar a.active {
+  background: #e6e6e634;
+}
+mat-toolbar a {
+  width: 100px;
+}
