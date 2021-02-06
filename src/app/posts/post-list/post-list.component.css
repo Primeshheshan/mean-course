@@ -26,4 +26,12 @@ mat-spinner {
 
 mat-paginator {
   margin-top: 20px;
+  width: 70%;
+  margin-left: 15%;
+}
+
+mat-accordion,
+mat-expansion-panel {
+  width: 70%;
+  margin-left: 15%;
 }

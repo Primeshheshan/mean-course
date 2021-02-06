@@ -1,6 +1,7 @@
 mat-card {
-  margin: 20px auto;
+  margin: 0 auto;
   display: block;
+  width: 70%;
 }
 
 mat-form-field,
