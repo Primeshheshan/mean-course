@@ -1,0 +1,25 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-card>
+  <form *ngIf="!isLoading" [formGroup]="loginFrom" (ngSubmit)="onLogin()" >
+    <mat-form-field>
+      <input
+        appAutoFocus
+        matInput
+        type="email"
+        formControlName="email"
+        placeholder="Email"
+        required>
+        <mat-error *ngIf="!loginFrom.hasError('required')">Please enter valid email</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+        required>
+        <mat-error *ngIf="!loginFrom.hasError('required')">Please enter valid password</mat-error>
+    </mat-form-field>
+    <button [disabled]="!loginFrom.valid" type="submit" mat-raised-button color="accent">LOGIN</button>
+  </form>
+</mat-card>
