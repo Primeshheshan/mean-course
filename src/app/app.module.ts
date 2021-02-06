@@ -23,6 +23,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostsCreateComponent } from './posts/posts-create/posts-create.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
+import { AutoFocusDirective } from './auto-focus.directive';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { MainNavComponent } from './main-nav/main-nav.component';
     AppComponent,
     PostsCreateComponent,
     PostListComponent,
-    MainNavComponent
+    MainNavComponent,
+    AutoFocusDirective
   ],
   imports: [
     BrowserModule,

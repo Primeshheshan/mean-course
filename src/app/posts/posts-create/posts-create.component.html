@@ -3,6 +3,7 @@
   <form [formGroup]="postFrom" (ngSubmit)="onSavePost()" >
     <mat-form-field>
       <input
+      appAutoFocus
       matInput
       type="text"
       placeholder="Title"
