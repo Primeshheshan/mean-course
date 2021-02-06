@@ -18,8 +18,12 @@ mat-spinner {
 }
 
 .post-image img {
-  width: 80%;
-  margin: 5px 10%;
+  width: 50%;
+  margin: 5px 25%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 5px;
+}
+
+mat-paginator {
+  margin-top: 20px;
 }
