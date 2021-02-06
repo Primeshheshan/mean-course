@@ -11,6 +11,7 @@
     <mat-nav-list>
       <a mat-list-item routerLink="/">Post List</a>
       <a mat-list-item routerLink="/create">New Post</a>
+      <a mat-list-item routerLink="/login">login</a>
       <!-- <a mat-list-item href="#">Contact</a> -->
     </mat-nav-list>
   </mat-sidenav>
@@ -29,6 +30,7 @@
       <div [ngClass]="{hidden: (isHandset$ | async)=== true}">
         <a mat-button routerLink="/">Post List</a>
         <a mat-button routerLink="/create">New Post</a>
+        <a mat-button routerLink="/login">Login</a>
         <!-- <a href="#">Contact</a> -->
       </div>
     </mat-toolbar>
