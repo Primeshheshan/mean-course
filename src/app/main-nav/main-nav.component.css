@@ -20,19 +20,18 @@
   flex: 1 1 auto;
 }
 
-.mat-toolbar a {
+mat-toolbar a {
   color: white;
   text-decoration: none;
   margin: 0 10px;
   display: inline-block;
+  width: 100px;
+}
+
+mat-toolbar a.active {
+  background: #e6e6e634;
 }
 
 .mat-nav-list a.active {
   background: #e6e6e6;
-}
-mat-toolbar a.active {
-  background: #e6e6e634;
-}
-mat-toolbar a {
-  width: 100px;
 }
