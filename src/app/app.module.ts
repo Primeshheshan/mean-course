@@ -24,6 +24,8 @@ import { PostsCreateComponent } from './posts/posts-create/posts-create.componen
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { AutoFocusDirective } from './auto-focus.directive';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { AutoFocusDirective } from './auto-focus.directive';
     PostsCreateComponent,
     PostListComponent,
     MainNavComponent,
-    AutoFocusDirective
+    AutoFocusDirective,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
