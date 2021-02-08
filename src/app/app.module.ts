@@ -13,9 +13,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { MatListModule } from '@angular/material/list';
+import {MatListModule} from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +28,7 @@ import { AutoFocusDirective } from './auto-focus.directive';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { SnackBarComponent } from './auth/snack-bar/snack-bar.component';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     MainNavComponent,
     AutoFocusDirective,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    SnackBarComponent
   ],
   imports: [
     BrowserModule,
@@ -46,17 +49,18 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    LayoutModule,
     MatButtonModule,
     MatInputModule,
     MatCardModule,
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
-    LayoutModule,
     MatListModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+    MatSnackBarModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
