@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { DoCheck, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { AuthData } from "./auth-data";
@@ -8,6 +8,7 @@ import { AuthData } from "./auth-data";
 export class AuthService {
   private token!: string;
   private isAuthenticated = false;
+  private tokenTimer!: any;
   private authStatusListener = new Subject<boolean>(); // push authentication informations to the components which are intersted
   // boolean for if user authenticated or not
   constructor(
@@ -25,11 +26,16 @@ export class AuthService {
 
   loginUser(email: string, password: string) {
     const authData: AuthData = {email:email, password: password};
-    this.http.post<{token: string}>("http://localhost:3000/api/user/login", authData)
+    this.http.post<{token: string, expiresIn: number}>("http://localhost:3000/api/user/login", authData)
       .subscribe(response => {
         const token = response.token;
         this.token = token;
         if(token) {
+          const expiresInDuration = response.expiresIn;
+          this.tokenTimer = setTimeout(() => {
+            this.logoutUser();
+          }, expiresInDuration * 1000);
+
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
         }
@@ -41,8 +47,8 @@ export class AuthService {
     this.token = null;
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
+    clearTimeout(this.tokenTimer);
     this.router.navigate(["/"]);
-
   }
 
   getToken() {
