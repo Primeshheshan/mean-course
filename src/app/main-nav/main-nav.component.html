@@ -10,9 +10,10 @@
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
       <a routerLinkActive= "active" [routerLinkActiveOptions]="{exact: true}" mat-list-item routerLink="/">Post List</a>
-      <a routerLinkActive= "active" mat-list-item routerLink="/create">New Post</a>
-      <a routerLinkActive= "active" mat-list-item routerLink="/login">Login</a>
-      <a routerLinkActive= "active" mat-list-item routerLink="/signup">Signup</a>
+      <a routerLinkActive= "active" mat-list-item routerLink="/create" *ngIf="userIsAuthenticated">New Post</a>
+      <a routerLinkActive= "active" mat-list-item routerLink="/login" *ngIf="!userIsAuthenticated">Login</a>
+      <a routerLinkActive= "active" mat-list-item routerLink="/signup" *ngIf="!userIsAuthenticated">Signup</a>
+      <button mat-button *ngIf="userIsAuthenticated">Logout</button>
       <!-- <a mat-list-item href="#">Contact</a> -->
     </mat-nav-list>
   </mat-sidenav>
@@ -30,9 +31,10 @@
       <span class="spacer"></span>
       <div [ngClass]="{hidden: (isHandset$ | async)=== true}">
         <a routerLinkActive= "active" [routerLinkActiveOptions]="{exact: true}" mat-button routerLink="/">Post List</a>
-        <a routerLinkActive= "active" mat-button routerLink="/create">New Post</a>
-        <a routerLinkActive= "active" mat-button routerLink="/login">Login</a>
-        <a routerLinkActive= "active" mat-button routerLink="/signup">Signup</a>
+        <a routerLinkActive= "active" mat-button routerLink="/create" *ngIf="userIsAuthenticated">New Post</a>
+        <a routerLinkActive= "active" mat-button routerLink="/login" *ngIf="!userIsAuthenticated">Login</a>
+        <a routerLinkActive= "active" mat-button routerLink="/signup" *ngIf="!userIsAuthenticated">Signup</a>
+        <button mat-button *ngIf="userIsAuthenticated">Logout</button>
         <!-- <a href="#">Contact</a> -->
       </div>
     </mat-toolbar>

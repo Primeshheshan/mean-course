@@ -1,11 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 import { AuthData } from "./auth-data";
 
 @Injectable({providedIn: "root"})
 export class AuthService {
   private token!: string;
-
+  private authStatusListener = new Subject<boolean>(); // push authentication informations to the components which are intersted
+  // boolean for if user authenticated or not
   constructor(private http: HttpClient) {}
 
   createUser(email: string, password: string) {
@@ -23,10 +25,15 @@ export class AuthService {
       .subscribe(response => {
         const token = response.token;
         this.token = token;
+        this.authStatusListener.next(true);
       });
   }
 
   getToken() {
     return this.token;
+  }
+
+  getAuthStatusListener() {
+    return this.authStatusListener.asObservable();
   }
 }
