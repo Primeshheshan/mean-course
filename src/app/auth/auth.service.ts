@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { DoCheck, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { AuthData } from "./auth-data";
@@ -35,7 +35,7 @@ export class AuthService {
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
           const now = new Date();
-          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000); // <-- current time + expired time
           this.saveAuthData(token, expirationDate);
           this.router.navigate(["/"]);
         }
@@ -58,7 +58,7 @@ export class AuthService {
   }
 
   logoutUser() {
-    this.token = null;
+    this.token = "";
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
     clearTimeout(this.tokenTimer);
