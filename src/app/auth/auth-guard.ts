@@ -29,6 +29,8 @@ export class AuthGuard implements CanActivate{
   openSnackBar() {
     this._snackBar.openFromComponent(SnackBarComponent, {
       duration: this.durationInSeconds * 1000,
+      panelClass: ['snackbar']
+
     });
   }
 
