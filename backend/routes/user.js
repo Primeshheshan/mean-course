@@ -56,13 +56,12 @@ router.post("/login", (req, res, next) => {
         { expiresIn: "1h" }
       );
       res.status(200).json({
-        token: token,
+        token: token, // send response with token feild
         expiresIn: 3600
       });
     })
     .catch(err => {
-      co
-      return res.status(401).json({
+        return res.status(401).json({
         message: "Auth failed"
       });
     });
