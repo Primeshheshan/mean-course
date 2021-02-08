@@ -28,6 +28,7 @@ export class MainNavComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
+    this.userIsAuthenticated = this.authService.getIsAuth();
     this.authListenerSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
