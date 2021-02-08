@@ -1,6 +1,6 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<mat-card>
-  <form *ngIf="!isLoading" [formGroup]="signupFrom" (ngSubmit)="onSignup()" >
+<mat-card *ngIf="!isLoading">
+  <form [formGroup]="signupFrom" (ngSubmit)="onSignup()" >
     <mat-form-field>
       <input
         appAutoFocus

@@ -13,7 +13,7 @@
       <a routerLinkActive= "active" mat-list-item routerLink="/create" *ngIf="userIsAuthenticated">New Post</a>
       <a routerLinkActive= "active" mat-list-item routerLink="/login" *ngIf="!userIsAuthenticated">Login</a>
       <a routerLinkActive= "active" mat-list-item routerLink="/signup" *ngIf="!userIsAuthenticated">Signup</a>
-      <button mat-button *ngIf="userIsAuthenticated">Logout</button>
+      <button mat-button (click)="onLogout()" *ngIf="userIsAuthenticated">Logout</button>
       <!-- <a mat-list-item href="#">Contact</a> -->
     </mat-nav-list>
   </mat-sidenav>
@@ -34,7 +34,7 @@
         <a routerLinkActive= "active" mat-button routerLink="/create" *ngIf="userIsAuthenticated">New Post</a>
         <a routerLinkActive= "active" mat-button routerLink="/login" *ngIf="!userIsAuthenticated">Login</a>
         <a routerLinkActive= "active" mat-button routerLink="/signup" *ngIf="!userIsAuthenticated">Signup</a>
-        <button mat-button *ngIf="userIsAuthenticated">Logout</button>
+        <button mat-button (click)="onLogout()" *ngIf="userIsAuthenticated">Logout</button>
         <!-- <a href="#">Contact</a> -->
       </div>
     </mat-toolbar>

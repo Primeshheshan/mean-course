@@ -37,6 +37,14 @@ export class AuthService {
       });
   }
 
+  logoutUser() {
+    this.token = null;
+    this.isAuthenticated = false;
+    this.authStatusListener.next(false);
+    this.router.navigate(["/"]);
+
+  }
+
   getToken() {
     return this.token;
   }
