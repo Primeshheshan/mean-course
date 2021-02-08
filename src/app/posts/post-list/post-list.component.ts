@@ -50,7 +50,7 @@ export class PostListComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.userIsAuthenticated = this.authService.getAuth();
+    this.userIsAuthenticated = this.authService.getIsAuth();
     this.authListenerSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;

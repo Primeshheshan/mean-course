@@ -53,7 +53,7 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  getAuth() {
+  getIsAuth() {
     return this.isAuthenticated;
   }
 }
