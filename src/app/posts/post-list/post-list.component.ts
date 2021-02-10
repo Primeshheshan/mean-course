@@ -31,6 +31,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.postService.deletePost(postId).subscribe(() => {
       this.postService.getPosts(this.postPerPage, this.currentPage);
+      this.postService.openSnackBar("Post deleted successfully", "snackbar-success");
     });
   }
 
