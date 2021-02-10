@@ -2,4 +2,14 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.snackbar {background: #f00;}
+.snackbar-error {
+  background: rgb(224, 8, 8);
+  max-width: 100% !important;
+  text-align: center !important;
+}
+.snackbar-success {
+  background: green;
+  max-width: 500px !important;
+  text-align: center !important;
+
+}
