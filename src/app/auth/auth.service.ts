@@ -1,8 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { AuthData } from "./auth-data";
+import { SnackBarComponent } from "./snack-bar/snack-bar.component";
 
 @Injectable({providedIn: "root"})
 export class AuthService {
@@ -14,14 +16,20 @@ export class AuthService {
   // boolean for if user authenticated or not
   constructor(
     private http: HttpClient,
-    private router: Router) {}
+    private router: Router,
+    private _snackBar: MatSnackBar
+    ) {}
 
   createUser(email: string, password: string) {
     const authData: AuthData = {email:email, password: password};
     //send post request
-    this.http.post("http://localhost:3000/api/user/signup", authData)
+    return this.http.post("http://localhost:3000/api/user/signup", authData)
       .subscribe(result => {
-      });
+        this.router.navigate(["/"]);
+      }, error => {
+        this.openSnackBar("This email address is already being used.!", "snackbar-error");
+        this.authStatusListener.next(false);
+      }); // handaling errors
   }
 
   loginUser(email: string, password: string) {
@@ -41,6 +49,9 @@ export class AuthService {
           this.saveAuthData(token, expirationDate, this.userId);
           this.router.navigate(["/"]);
         }
+      }, error => {
+        this.openSnackBar("The email address or password is incorrect. Please retry.!", "snackbar-error");
+        this.authStatusListener.next(false);
       });
   }
 
@@ -100,6 +111,15 @@ export class AuthService {
       expirationDate: new Date(expirationDate),
       userId: userId
     }
+  }
+
+  openSnackBar(data: string, style: string) {
+    const styleClass = style;
+    this._snackBar.openFromComponent(SnackBarComponent, {
+      duration: 5000,
+      data: data,
+      panelClass: [styleClass]
+    });
   }
 
   getToken() {
