@@ -7,6 +7,7 @@ import { AuthData } from "./auth-data";
 @Injectable({providedIn: "root"})
 export class AuthService {
   private token!: string;
+  private userId!: string;
   private isAuthenticated = false;
   private tokenTimer!: any;
   private authStatusListener = new Subject<boolean>(); // push authentication informations to the components which are intersted
@@ -25,7 +26,7 @@ export class AuthService {
 
   loginUser(email: string, password: string) {
     const authData: AuthData = {email:email, password: password};
-    this.http.post<{token: string, expiresIn: number}>("http://localhost:3000/api/user/login", authData)
+    this.http.post<{token: string, expiresIn: number, userId: string}>("http://localhost:3000/api/user/login", authData)
       .subscribe(response => {
         const token = response.token;
         this.token = token;
@@ -33,6 +34,7 @@ export class AuthService {
           const expiresInDuration = response.expiresIn;
           this.setAuthTimer(expiresInDuration);
           this.isAuthenticated = true;
+          this.userId = response.userId;
           this.authStatusListener.next(true);
           const now = new Date();
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000); // <-- current time + expired time
@@ -104,5 +106,9 @@ export class AuthService {
 
   getIsAuth() {
     return this.isAuthenticated;
+  }
+
+  getUserId() {
+    return this.userId;
   }
 }
