@@ -69,13 +69,15 @@ export class PostsCreateComponent implements OnInit {
         this.mode = 'edit';
         this.postId = paramMap.get('postId');
         this.isLoading = true;
+
         this.postService.getPost(this.postId).subscribe(postData => {
           this.isLoading = false;
           this.post = {
             id: postData._id,
             title:postData.title,
             content: postData.content,
-            imagePath: postData.imagePath
+            imagePath: postData.imagePath,
+            creator: postData.creator
           };
           this.postFrom.setValue({ // when get all vales set that all in form
             title: this.post.title,
