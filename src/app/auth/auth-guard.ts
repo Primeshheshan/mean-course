@@ -7,7 +7,6 @@ import { SnackBarComponent } from "./snack-bar/snack-bar.component";
 
 @Injectable()
 export class AuthGuard implements CanActivate{
-  durationInSeconds = 5;
 
   constructor(
     private authService: AuthService,
@@ -21,17 +20,8 @@ export class AuthGuard implements CanActivate{
     const isAuth = this.authService.getIsAuth();
     if(!isAuth) { //  not authenticated
       this.router.navigate(["/login"]);
-      this.openSnackBar();
+      this.authService.openSnackBar("Not logged in, Please login or signup to continue.!","snackbar-error");
     }
     return isAuth;
   }
-
-  openSnackBar() {
-    this._snackBar.openFromComponent(SnackBarComponent, {
-      duration: this.durationInSeconds * 1000,
-      panelClass: ['snackbar']
-
-    });
-  }
-
 }
