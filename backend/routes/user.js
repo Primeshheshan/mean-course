@@ -37,7 +37,7 @@ router.post("/login", (req, res, next) => {
     .then(user => {
       if (!user) {
         return res.status(401).json({
-          message: "Auth failed"
+          message: "Auth failed, Please try again!"
         });
       }
       fetchedUser = user;
@@ -46,7 +46,7 @@ router.post("/login", (req, res, next) => {
     .then(result => {
       if (!result) {
         return res.status(401).json({
-          message: "Auth failed"
+          message: "Auth failed, Please try again!"
         });
       }
        //if pass above if block then user have valid password
