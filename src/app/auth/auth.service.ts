@@ -27,7 +27,7 @@ export class AuthService {
       .subscribe(result => {
         this.router.navigate(["/"]);
       }, error => {
-        this.openSnackBar("This email address is already being used.!", "snackbar-error");
+        // this.openSnackBar("This email address is already being used.!", "snackbar-error");
         this.authStatusListener.next(false);
       }); // handaling errors
   }
@@ -50,7 +50,7 @@ export class AuthService {
           this.router.navigate(["/"]);
         }
       }, error => {
-        this.openSnackBar("The email address or password is incorrect. Please retry.!", "snackbar-error");
+        // this.openSnackBar("The email address or password is incorrect. Please retry.!", "snackbar-error");
         this.authStatusListener.next(false);
       });
   }
