@@ -1,27 +1,31 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { PostServcie } from '../post.servcie';
 import { PostModel } from '../post.model';
 import { mimeType } from './mime-type.validator';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-posts-create',
   templateUrl: './posts-create.component.html',
   styleUrls: ['./posts-create.component.css']
 })
-export class PostsCreateComponent implements OnInit {
+export class PostsCreateComponent implements OnInit, OnDestroy {
   public postFrom!: FormGroup;
   public mode = 'create';
   private postId!: string;
+  private authStatusSub!: Subscription
   post!: PostModel;
   isLoading = false;
   imagePreview!: string;
 
   constructor(
     private postService: PostServcie,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService) { }
 
   onSavePost() {
     if(this.postFrom.invalid) {
@@ -58,6 +62,10 @@ export class PostsCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authStatusSub = this.authService.getAuthStatusListener()
+      .subscribe(authStatus => {
+        this.isLoading = false;
+      });
     this.postFrom = new FormGroup({
       title: new FormControl(null, Validators.required),
       content: new FormControl(null, Validators.required),
@@ -93,5 +101,8 @@ export class PostsCreateComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
+  }
 
 }
