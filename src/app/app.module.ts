@@ -32,6 +32,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { SnackBarComponent } from './auth/snack-bar/snack-bar.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
+import { LogoutDialogComponent } from './main-nav/logout-dialog/logout-dialog.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { ErrorComponent } from './error/error.component';
     LoginComponent,
     SignupComponent,
     SnackBarComponent,
-    ErrorComponent
+    ErrorComponent,
+    LogoutDialogComponent
   ],
   imports: [
     BrowserModule,

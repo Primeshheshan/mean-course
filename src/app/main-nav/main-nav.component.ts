@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
+import { LogoutDialogComponent } from './logout-dialog/logout-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-main-nav',
@@ -21,10 +23,13 @@ export class MainNavComponent implements OnInit, OnDestroy{
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private authService: AuthService) {}
+    private authService: AuthService,
+    private dialog: MatDialog) {}
 
   onLogout() {
-    this.authService.logoutUser();
+    this.dialog.open(LogoutDialogComponent, {
+      width: "250px"
+    });
   }
 
   ngOnInit() {
