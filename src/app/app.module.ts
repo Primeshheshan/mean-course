@@ -31,6 +31,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { SnackBarComponent } from './auth/snack-bar/snack-bar.component';
 import { ErrorInterceptor } from './error-interceptor';
+import { ErrorComponent } from './error/error.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ErrorInterceptor } from './error-interceptor';
     AutoFocusDirective,
     LoginComponent,
     SignupComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +71,7 @@ import { ErrorInterceptor } from './error-interceptor';
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent, SnackBarComponent]
 })
 export class AppModule { }
