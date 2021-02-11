@@ -29,6 +29,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { SnackBarComponent } from './auth/snack-bar/snack-bar.component';
+import { ErrorInterceptor } from './error-interceptor';
 
 
 @NgModule({
@@ -62,7 +63,10 @@ import { SnackBarComponent } from './auth/snack-bar/snack-bar.component';
     MatPaginatorModule,
     MatSnackBarModule,
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
