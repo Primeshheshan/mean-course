@@ -9,9 +9,7 @@ import { ErrorComponent } from "./error/error.component";
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(
-    private authService: AuthService,
-    private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     return next.handle(req).pipe(
