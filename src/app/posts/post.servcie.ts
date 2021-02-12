@@ -4,8 +4,11 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
+import { environment } from "src/environments/environment";
 import { SnackBarComponent } from "../auth/snack-bar/snack-bar.component";
 import { PostModel } from "./post.model";
+
+const BACKEND_URL = environment.apiUrl + "/posts/";
 
 @Injectable({providedIn: 'root'})
 export class PostServcie {
@@ -23,7 +26,7 @@ export class PostServcie {
     postData.append("title", title);
     postData.append("content", content);
     postData.append("image", image, title);
-    this.http.post<{message: string, post: PostModel}>("http://localhost:3000/api/posts", postData)
+    this.http.post<{message: string, post: PostModel}>(BACKEND_URL , postData)
       .subscribe( responseData => {
         this.router.navigate(["/"]);
         this.openSnackBar("Post created successfully", "snackbar-success");
@@ -32,7 +35,7 @@ export class PostServcie {
 
   //delete post
   deletePost(postId: string) {
-    return this.http.delete("http://localhost:3000/api/posts/" + postId);
+    return this.http.delete(BACKEND_URL + postId);
   }
 
   // update post
@@ -54,7 +57,7 @@ export class PostServcie {
       }
     }
     // this is updated post element
-    this.http.put("http://localhost:3000/api/posts/" + postId, postData)
+    this.http.put(BACKEND_URL + postId, postData)
     .subscribe(response => {
       this.router.navigate(["/"]);
       this.openSnackBar("Post updated successfully", "snackbar-success");
@@ -107,7 +110,7 @@ export class PostServcie {
       content: string,
       imagePath: string,
       creator: string}>
-    ("http://localhost:3000/api/posts/" + id);
+    (BACKEND_URL + id);
   }
 
 
