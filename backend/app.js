@@ -8,7 +8,8 @@ const userRoutes = require('./routes/user');
 const app =  express();
 
 mongoose
-.connect("mongodb+srv://primesh:SbHAm8bXVq8G4S5@cluster0.21bca.mongodb.net/userPosts?retryWrites=true&w=majority",
+.connect(
+  "mongodb+srv://primesh:"+process.env.MONGO_ATLAS_PASSWORD +"@cluster0.21bca.mongodb.net/userPosts?retryWrites=true&w=majority",
 { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
   console.log('==>Connected to database successfullly!');
