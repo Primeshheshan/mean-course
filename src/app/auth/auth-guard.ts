@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate{
     ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     const isAuth = this.authService.getIsAuth();
     if(!isAuth) { //  not authenticated
-      this.router.navigate(["/login"]);
+      this.router.navigate(["/auth/login"]);
       // this.authService.openSnackBar("Not logged in, Please login or signup to continue.!","snackbar-error");
       this.dialog.open(ErrorComponent, {
         width: '350px',
