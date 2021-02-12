@@ -28,7 +28,8 @@ export class MainNavComponent implements OnInit, OnDestroy{
 
   onLogout() {
     this.dialog.open(LogoutDialogComponent, {
-      width: "250px"
+      width: "300px",
+      height: "150px"
     });
   }
 
