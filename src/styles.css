@@ -8,7 +8,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   text-align: center !important;
 } */
 .snackbar-success {
-  background: green;
+  background: #00c400;
   max-width: 500px !important;
   text-align: center !important;
 }
