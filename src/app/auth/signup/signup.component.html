@@ -1,4 +1,4 @@
-<mat-spinner *ngIf="isLoading"></mat-spinner>
+<!-- <mat-spinner *ngIf="isLoading"></mat-spinner>
 <mat-card *ngIf="!isLoading">
   <form [formGroup]="signupFrom" (ngSubmit)="onSignup()" >
     <mat-form-field>
@@ -22,4 +22,52 @@
     </mat-form-field>
     <button type="submit" mat-raised-button color="accent">Signup</button>
   </form>
-</mat-card>
+</mat-card> -->
+
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div class="container-fluid" >
+  <div class="row">
+
+
+    <div class="design-container col-md-6">
+      <div class="mobile-illustrator">
+        <img src="../../../assets/img/mobile.svg" alt="phone" class="img-fluid">
+      </div>
+      <div class="wave" style="height: 150px; overflow: hidden;" >
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+            style="height: 100%; width: 100%;">
+          <path d="M-0.84,1.48 C149.99,150.00 349.20,-49.98 501.41,148.52 L504.22,158.38 L0.00,150.00 Z"
+              style="stroke: none; fill: #304ffe;">
+          </path>
+        </svg>
+      </div>
+    </div>
+
+    <div class="card-container col-md-6">
+      <mat-card *ngIf="!isLoading">
+        <form [formGroup]="signupFrom" (ngSubmit)="onSignup()" >
+          <mat-form-field>
+            <input
+              appAutoFocus
+              matInput
+              type="email"
+              formControlName="email"
+              placeholder="Email"
+              required>
+              <mat-error *ngIf="!signupFrom.hasError('required')">Please enter valid email</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="password"
+              placeholder="Password"
+              formControlName="password"
+              required>
+              <mat-error *ngIf="!signupFrom.hasError('required')">Please enter valid password</mat-error>
+          </mat-form-field>
+          <button type="submit" mat-raised-button color="accent">Signup</button>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

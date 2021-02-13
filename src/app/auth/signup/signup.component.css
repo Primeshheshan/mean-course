@@ -1,4 +1,4 @@
-mat-card {
+/* mat-card {
   margin: 20px auto;
   display: block;
   width: 90%;
@@ -18,4 +18,78 @@ button {
 
 mat-spinner {
   margin:10px auto;
+} */
+
+
+mat-spinner {
+  margin:10px auto;
 }
+mat-card {
+  margin: 20px auto;
+  display: block;
+  width: 60%;
+}
+
+mat-form-field {
+  width: 90%;
+  margin-left: 5%;
+}
+.contianer-fluid {
+  padding: 0;
+  width: 100%;
+}
+button {
+  width: 40%;;
+  margin-left: 30%;
+  margin-top: 2%;
+  padding: 0 auto;
+}
+
+.card-container {
+  position: relative;
+}
+
+.card-container mat-card {
+  top: 40%;
+}
+
+.design-container {
+  padding: 0;
+  position: relative;
+  bottom: 0;
+}
+
+.wave {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.mobile-illustrator {
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 10%;
+}
+
+@media only screen and (max-width: 480px) {
+  .mobile-illustrator {
+    display: none;
+  }
+  mat-card {
+    margin: 20px auto;
+    display: block;
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .mobile-illustrator {
+    display: none;
+  }
+  mat-card {
+    margin: 20px auto;
+    display: block;
+    width: 80%;
+  }
+}
+
