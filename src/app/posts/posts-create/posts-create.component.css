@@ -1,5 +1,5 @@
 mat-card {
-  margin: 0 auto;
+  margin: 20px auto;
   display: block;
   width: 70%;
 }
@@ -34,4 +34,19 @@ mat-spinner {
 
 .image-preview img {
   height: 100%;
+}
+
+
+@media only screen and (max-width: 480px) {
+  .mat-card {
+    width: 80%;
+    margin: 20px 10%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .mat-card {
+    width: 80%;
+    margin: 20px 10%;
+  }
 }
