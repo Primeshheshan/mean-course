@@ -70,3 +70,17 @@ button {
   }
 }
 
+@media only screen and (max-width: 1023px) {
+  .mobile-illustrator {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10%;
+  }
+  mat-card {
+    margin: 20px auto;
+    display: block;
+    width: 80%;
+  }
+}
+
+
