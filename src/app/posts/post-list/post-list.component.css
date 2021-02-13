@@ -10,8 +10,7 @@ mat-expansion-panel {
   margin-left: 10%;
 }
 mat-spinner {
-  margin: auto;
-  margin-top: 100px;
+  margin:10px auto;
 }
 
 .text-post {
