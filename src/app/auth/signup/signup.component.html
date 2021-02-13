@@ -1,29 +1,3 @@
-<!-- <mat-spinner *ngIf="isLoading"></mat-spinner>
-<mat-card *ngIf="!isLoading">
-  <form [formGroup]="signupFrom" (ngSubmit)="onSignup()" >
-    <mat-form-field>
-      <input
-        appAutoFocus
-        matInput
-        type="email"
-        formControlName="email"
-        placeholder="Email"
-        required>
-        <mat-error *ngIf="!signupFrom.hasError('required')">Please enter valid email</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input
-        matInput
-        type="password"
-        placeholder="Password"
-        formControlName="password"
-        required>
-        <mat-error *ngIf="!signupFrom.hasError('required')">Please enter valid password</mat-error>
-    </mat-form-field>
-    <button type="submit" mat-raised-button color="accent">Signup</button>
-  </form>
-</mat-card> -->
-
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 <div class="container-fluid" *ngIf="!isLoading">
   <div class="row">
