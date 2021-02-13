@@ -1,8 +1,6 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<div class="container-fluid" >
+<div class="container-fluid" *ngIf="!isLoading">
   <div class="row">
-
-
     <div class="design-container col-md-6">
       <div class="mobile-illustrator">
         <img src="../../../assets/img/mobile.svg" alt="phone" class="img-fluid">
